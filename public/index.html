@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket Server</title>
+</head>
+
+<body>
+    <h1>Acceso Denegado</h1>
+    <script src="socket.io/socket.io.js"></script>
+
+
+    <script>
+        var socket = io();
+        socket.on('connect', function() {
+            console.log('Conectado al Servidor');
+        });
+
+        var socket = io();
+        socket.on('disconnect', function() {
+            console.log('Perdimos conexion al Servidor');
+        });
+
+
+        // ======== EMITIR EVENTOS =======//
+        socket.emit('mensaje', {
+                nombre: 'David'
+            })
+            // ===============================//
+            // ======== ESCUCHAR EVENTOS =======//
+        socket.on('mensaje', function(payload) {
+            console.log('Escuchando ', payload);
+        });
+        // ===============================//
+
+        // ======== ESCUCHAR EVENTOS =======//
+        socket.on('emitir-mensaje', function(payload) {
+            console.log('Escuchando ', payload);
+        });
+        // ===============================//
+        // ======== ESCUCHAR EVENTO BANDAS ACTIVAS =======//
+        socket.on('active-bands', function(bands) {
+            console.clear();
+            console.table(bands);
+        });
+        // ===============================//
+    </script>
+</body>
+
+</html>
